@@ -1,11 +1,11 @@
-# Multi-stage Dockerfile for pkg15 (contains all packages 1-14)
+# Multi-stage Dockerfile for pkg10 (contains all packages 1-9)
 FROM alpine:latest as collector
 WORKDIR /app
 
-# Clone all dependency packages
+# Clone all dependency packages (1-9)
 RUN apk add --no-cache git
 RUN for i in $(seq 1 9); do \
-    git clone https://github.com/Suryavamsi6304/pkg${i}.git pkg${i} || true; \
+    git clone https://github.com/Suryavamsi6304/pkg${i}.git pkg${i} || echo "Failed to clone pkg${i}"; \
     done
 
 # Final stage - Java runtime
